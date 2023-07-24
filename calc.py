@@ -6,10 +6,21 @@ def press(number):
     equationLabel.set(equationText)
 
 def equal():
-    global equationText
-    total = str(eval(equationText))
-    equationLabel.set(total)
-    equationText = total
+
+    try:
+        global equationText
+        total = str(eval(equationText))
+        equationLabel.set(total)
+        equationText = total
+
+    except SyntaxError:
+        equationLabel.set("Syntax Error")
+        equationText = ""
+
+    except ZeroDivisionError:
+        equationLabel.set("Division Error")
+        equationText = ""
+
 
 def clear():
     global equationText
@@ -24,6 +35,8 @@ window.title("Calculator")
 equationText = ""
 equationLabel = tk.StringVar()
 
+container = tk.Frame(window)
+container.pack()
 
 lbl = tk.Label(window,textvariable=equationLabel, bg='white', width=60, height=4)
 lbl.pack()
